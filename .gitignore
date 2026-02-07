@@ -1,0 +1,13 @@
+
+# Virtual environment
+venv/
+.venv/
+
+# Models
+models/*.pkl
+
+# IDE / Editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace

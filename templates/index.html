@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Energy Consumption Predictor</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 420px;
+            background: #ffffff;
+            padding-left: 30px;
+            padding-right: 30px;
+            border-radius: 14px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: #34495e;
+        }
+
+        input, select, button {
+            width: 100%;
+            height: 45px;
+            padding: 10px 12px;
+            margin-bottom: 18px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            outline: none;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #6c63ff;
+            box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+        }
+
+        button {
+            height: 50px;
+            margin-top: 10px;
+            background: linear-gradient(135deg, #6c63ff, #5a54d1);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(108, 99, 255, 0.4);
+        }
+
+        .result, .error {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .result {
+            background: #ecfdf5;
+            color: #065f46;
+        }
+
+        .error {
+            background: #ffe4e6;
+            color: #b91c1c;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 25px;
+            color: #7f8c8d;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>⚡ Energy Consumption Predictor</h2>
+
+        <form method="POST">
+            <label>Temperature (°C)</label>
+            <input type="number" step="0.1" name="temperature" placeholder="e.g., 25" required>
+
+            <label>Number of Occupants</label>
+            <input type="number" name="occupants" placeholder="e.g., 4" required>
+
+            <label>Air Conditioner</label>
+            <select name="has_ac" required>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label>Date</label>
+            <input type="date" name="date" required>
+
+            <button type="submit">🔍 Predict Energy</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            ⚡ Estimated Consumption: <br>
+            <b>{{ prediction }} kWh</b>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">
+            ❌ {{ error }}
+        </div>
+        {% endif %}
+
+        <div class="footer">
+            ML-powered energy forecasting
+        </div>
+    </div>
+</body>
+</html>
